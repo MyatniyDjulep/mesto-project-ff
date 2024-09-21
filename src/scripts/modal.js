@@ -2,7 +2,6 @@
 
 export function openPopup(popup) {
   popup.classList.add('popup_is-opened');
-  popup.classList.add('popup_is-animated');
   document.addEventListener('keydown', closePopupByPressEsc);
 }
 
@@ -19,5 +18,12 @@ function closePopupByPressEsc(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_is-opened');
     closePopup(openedPopup);
+  }
+}
+
+export function closePopupByClick(evt) {
+  const popup = evt.currentTarget; // Получаем текущий попап
+  if (evt.target.classList.contains('popup__close') || evt.target === popup) {
+    closePopup(popup); // Вызываем функцию закрытия, передаем нужный попап
   }
 }

@@ -1,10 +1,10 @@
 import '../pages/index.css';
 import { initialCards } from './cards.js';
-import { openPopup, closePopup } from './modal.js';
+import { openPopup, closePopup, closePopupByClick } from './modal.js';
 import { createCard, likeCard, removeCard } from './card.js';
 
 // @todo: DOM узлы
-const cardList = document.querySelector('.places__list');
+const cardsContainer = document.querySelector('.places__list');
 
 // @todo: Вывести карточки на страницу
 initialCards.forEach(function (item) {
@@ -15,14 +15,16 @@ initialCards.forEach(function (item) {
     likeCard,
     openImagePopup
   );
-  cardList.append(card);
+  cardsContainer.append(card);
 });
 
 // функция открытия попапа с изображением:
+
+const cardImagePopup = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
+
 function openImagePopup(evt) {
-  const cardImagePopup = document.querySelector('.popup_type_image');
-  const popupImage = document.querySelector('.popup__image');
-  const popupCaption = document.querySelector('.popup__caption');
   popupImage.src = evt.target.src;
   popupImage.alt = evt.target.alt;
   popupCaption.textContent = evt.target.alt;
@@ -42,15 +44,9 @@ cardAddButton.addEventListener('click', () => {
 
 const popups = document.querySelectorAll('.popup');
 
-popups.forEach((item) => {
-  item.addEventListener('click', (evt) => {
-    if (evt.target.classList.contains('popup__close') || evt.target === item) {
-      closePopup(item);
-    }
-  });
+popups.forEach((popup) => {
+  popup.addEventListener('click', closePopupByClick);
 });
-
-// обработка кликов по кнопке редактирования профиля:
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileEditPopup = document.querySelector('.popup_type_edit');
@@ -62,18 +58,15 @@ profileEditButton.addEventListener('click', () => {
 
 // функция заполнения полей формы в попапе редактирования профиля текущими значениями:
 
+const name = document.querySelector('.profile__title');
+const description = document.querySelector('.profile__description');
+
 function fillEditFormFields() {
   const formEditProfile = document.forms['edit-profile'];
   const inputName = formEditProfile.elements.name;
   const inputDescription = formEditProfile.elements.description;
-
-  const name = document.querySelector('.profile__title').textContent;
-  const description = document.querySelector(
-    '.profile__description'
-  ).textContent;
-
-  inputName.value = name;
-  inputDescription.value = description;
+  inputName.value = name.textContent;
+  inputDescription.value = description.textContent;
 }
 
 ///// ==========================================================
@@ -89,12 +82,9 @@ function handleProfileFormSubmit(evt) {
   //получение значений полей:
   const nameValue = nameInput.value;
   const jobValue = jobInput.value;
-  //выбор элементов для вставки значений:
-  const nameProfile = document.querySelector('.profile__title');
-  const descriptionProfile = document.querySelector('.profile__description');
   //вставка новых значений:
-  nameProfile.textContent = nameValue;
-  descriptionProfile.textContent = jobValue;
+  name.textContent = nameValue;
+  description.textContent = jobValue;
   //закрытие попапа после отправки формы:
   closePopup(profileEditPopup);
 }
@@ -122,7 +112,7 @@ function handleCardFormSubmit(evt) {
     likeCard,
     openImagePopup
   );
-  cardList.prepend(cardElement); //добавление новой карточки в начало, перед остальными карточками.
+  cardsContainer.prepend(cardElement); //добавление новой карточки в начало, перед остальными карточками.
   formCard.reset(); //сброс, очистка полей формы.
   closePopup(cardAddPopup); //закрытие попапа после отправки формы:
 }
