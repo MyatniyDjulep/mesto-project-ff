@@ -1,3 +1,3 @@
 # Проектная работа Mesto
 
-[Ссылка](https://github.com/MyatniyDjulep/mesto-project-ff)
+[Ссылка](https://myatniydjulep.github.io/mesto-project-ff/)
