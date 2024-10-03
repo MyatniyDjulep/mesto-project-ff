@@ -54,9 +54,7 @@ export const deleteCardFromServer = (cardId) => {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Функция обновления аватара профиля
@@ -73,9 +71,7 @@ export const addLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers,
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Функция удаления лайка
@@ -83,7 +79,5 @@ export const deleteLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
