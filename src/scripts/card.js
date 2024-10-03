@@ -62,19 +62,13 @@ export const removeCard = (card, cardId) => {
 export const likeCard = (event, cardId, likesCounter) => {
   const button = event.target;
 
-  if (button.classList.contains('card__like-button_is-active')) {
-    deleteLike(cardId)
-      .then((cardData) => {
-        button.classList.remove('card__like-button_is-active');
-        likesCounter.textContent = cardData.likes.length;
-      })
-      .catch(handleError);
-  } else {
-    addLike(cardId)
-      .then((cardData) => {
-        button.classList.add('card__like-button_is-active');
-        likesCounter.textContent = cardData.likes.length;
-      })
-      .catch(handleError);
-  }
+  const likeMethod = button.classList.contains('card__like-button_is-active')
+    ? deleteLike
+    : addLike;
+  likeMethod(cardId)
+    .then((cardData) => {
+      button.classList.toggle('card__like-button_is-active');
+      likesCounter.textContent = cardData.likes.length;
+    })
+    .catch(handleError);
 };

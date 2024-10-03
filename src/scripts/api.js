@@ -28,9 +28,7 @@ export const getUser = () => {
 export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Редактирование профиля
@@ -39,9 +37,7 @@ export const updateUser = (name, about) => {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({ name, about }),
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Добавление новой карточки
@@ -50,9 +46,7 @@ export const addNewCard = (name, link) => {
     method: 'POST',
     headers: config.headers,
     body: JSON.stringify({ name, link }),
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Функция удаления карточки с сервера
@@ -71,9 +65,7 @@ export const updateAvatar = (avatar) => {
     method: 'PATCH',
     headers: config.headers,
     body: JSON.stringify({ avatar }),
-  })
-    .then(handleResponse)
-    .catch(handleError);
+  }).then(handleResponse);
 };
 
 // Функция добавления лайка
