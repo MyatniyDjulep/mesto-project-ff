@@ -39,8 +39,6 @@ const placeNameInput = formNewPlace.querySelector(
 );
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeNewAvatar = document.querySelector('.popup_type_avatar');
-const saveButton = formEditProfile.querySelector('.popup__button');
-const initialTextBtn = saveButton.textContent;
 const formNewAvatar = document.querySelector('form[name="edit-avatar"]');
 const avatarInput = formNewAvatar.querySelector('.popup__input_type_avatar');
 const profileOverlay = document.querySelector('.profile__overlay');
@@ -146,6 +144,7 @@ function handleCardFormSubmit(evt) {
   const linkValue = inputLink.value;
 
   const saveButton = formNewPlace.querySelector('.popup__button');
+  const initialTextBtn = saveButton.textContent;
   saveButton.textContent = 'Сохранение...';
   saveButton.classList.add('saving');
 
